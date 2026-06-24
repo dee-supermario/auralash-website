@@ -78,9 +78,13 @@
     padding-top: 11rem;
   }
 
-  .hero img {
-    max-width: 100%;
-  }
+.hero img {
+        max-width: 100%;
+        max-height: 55vh; /* Stops the image from taking up more than 55% of the screen height */
+        object-fit: cover;
+        object-position: center 20%; /* Ensures the model's eyes stay in the frame if the image gets cropped */
+        border-radius: 8px; /* Adds a nice soft edge for mobile */
+    }
 
   /* Services Mobile Adjustments */
   .services-grid {
