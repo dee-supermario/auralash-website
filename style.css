@@ -1,0 +1,454 @@
+/* =========================================
+   GLOBAL VARIABLES & RESETS
+========================================= */
+:root {
+  --black: #0a0a0a;
+  --white: #ffffff;
+  --light-grey: #f7f7f7;
+  --dark-grey: #333333;
+  --border: #e6e6e6;
+  --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* The magic smooth scroll for our single page */
+}
+
+body {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  background-color: var(--white);
+  color: var(--black);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* =========================================
+   TYPOGRAPHY & ANIMATIONS
+========================================= */
+h1,
+h2,
+h3 {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  font-size: 3.9rem;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+}
+
+h2 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+/* Elegant fade-in slide-up animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================================
+   BUTTONS
+========================================= */
+.btn-primary {
+  display: inline-block;
+  background-color: var(--black);
+  color: var(--white);
+  padding: 14px 32px;
+  text-decoration: none;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.9rem;
+  transition: var(--transition);
+  border: 1px solid var(--black);
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: var(--white);
+  color: var(--black);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+  transform: translateY(-2px);
+}
+
+/* =========================================
+   HEADER & NAVIGATION
+========================================= */
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.98);
+  backdrop-filter: blur(5px);
+  /* Modern blur effect */
+  border-bottom: 1px solid var(--border);
+  z-index: 1000;
+  padding: 1rem 5%;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: var(--white);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  /* To use an image logo later: 
+       background: url('../assets/images/logo/logo.png') no-repeat center;
+       background-size: contain;
+       width: 150px; height: 40px; text-indent: -9999px; */
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: var(--white);
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+nav ul li a:not(.btn-primary):hover {
+  color: #dadada;
+}
+
+/* =========================================
+   MAIN SECTIONS (Shared Styles)
+========================================= */
+section {
+  padding: 8rem 5%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* =========================================
+   HERO SECTION
+========================================= */
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4rem;
+  min-height: 100vh;
+  padding-top: 12rem;
+  /* Account for fixed header */
+}
+
+.hero>div {
+  flex: 1;
+  animation: fadeInUp 1s ease-out forwards;
+}
+
+.hero img {
+  flex: 1;
+  max-width: 50%;
+  height: auto;
+  object-fit: cover;
+  aspect-ratio: 4/5;
+  animation: fadeInUp 1s ease-out 0.3s forwards;
+  opacity: 0;
+  /* Starts hidden for animation */
+}
+
+/* =========================================
+   EDITORIAL SERVICES SECTION (No Cards)
+========================================= */
+.services-editorial {
+  padding: 8rem 5%;
+  background-color: var(--bg-color);
+  /* Keeps it seamlessly integrated into the black background */
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2.8rem;
+  margin-bottom: 6rem;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.editorial-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* The Row Layout */
+.service-row {
+  display: flex;
+  align-items: center;
+  gap: 5rem;
+  margin-bottom: 8rem;
+}
+
+/* Magic Trick: Every even row (2, 4, 6) reverses its layout automatically */
+.service-row:nth-child(even) {
+  flex-direction: row-reverse;
+}
+
+.service-row:last-child {
+  margin-bottom: 0;
+}
+
+/* The Image Side */
+.service-media {
+  flex: 1;
+  position: relative;
+}
+
+.service-media img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  /* Forces a tall, elegant portrait crop */
+  object-fit: cover;
+  border-radius: 4px;
+  filter: grayscale(20%) contrast(110%);
+  /* Gives photos a slightly moody, editorial tint */
+  transition: filter 0.5s ease;
+}
+
+.service-media img:hover {
+  filter: grayscale(0%) contrast(100%);
+}
+
+/* The Text Side */
+.service-text {
+  flex: 1;
+  padding: 2rem 0;
+}
+
+.service-text h3 {
+  font-size: 2.5rem;
+  font-weight: 300;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+  font-family: 'Playfair Display', serif;
+  /* Elegant serif font */
+}
+
+.service-text .price {
+  font-size: 1.5rem;
+  color: #aaaaaa;
+  margin-bottom: 2rem;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 1px;
+}
+
+.service-text .description {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+}
+
+/* Styling the bullet points cleanly */
+.service-details {
+  list-style: none;
+  padding: 0;
+  border-top: 1px solid #333;
+  padding-top: 1.5rem;
+}
+
+.service-details li {
+  color: #888;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.service-details strong {
+  color: var(--text-primary);
+  font-weight: 600;
+  margin-right: 0.5rem;
+}
+
+/* =========================================
+   MOBILE RESPONSIVENESS FOR EDITORIAL
+========================================= */
+@media screen and (max-width: 900px) {
+
+  .service-row,
+  .service-row:nth-child(even) {
+    flex-direction: column;
+    /* Stacks image on top, text on bottom for mobile */
+    gap: 2rem;
+    margin-bottom: 5rem;
+  }
+
+  .service-text {
+    padding: 0;
+    text-align: center;
+  }
+
+  .service-details {
+    text-align: left;
+    /* Keeps the details readable on mobile */
+  }
+}
+
+/* =========================================
+   BOOKING & CONTACT SECTIONS
+========================================= */
+.booking-embed {
+  text-align: center;
+}
+
+.booking-widget-container {
+  margin-top: 3rem;
+  border: 1px solid var(--border);
+  min-height: 500px;
+  /* Placeholder height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--light-grey);
+}
+
+.location-info {
+  text-align: center;
+  padding-top: 0;
+}
+
+.contact-details {
+  margin-top: 2rem;
+  font-size: 1.1rem;
+}
+
+/* =========================================
+   FOOTER
+========================================= */
+.site-footer {
+  background-color: #000000;
+  /* Deep rich black */
+  border-top: 1px solid rgb(255, 255, 255);
+  /* Subtle separator */
+  padding: 5rem 5% 2rem;
+  color: var(--white);
+}
+
+.footer-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-bottom: 4rem;
+  border-bottom: 1px solid rgb(255, 255, 255);
+}
+
+/* Brand & Phone Section */
+.footer-brand h3 {
+  color: var(--white);
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 1.7rem;
+  margin-bottom: 0.2rem;
+  letter-spacing: 1px;
+}
+
+.footer-brand p {
+  font-size: 0.60rem;
+  margin-bottom: 1rem;
+  color: white;
+}
+
+.footer-phone {
+  display: inline-block;
+  color: var(--white);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.2rem;
+  transition: color var(--transition-speed);
+}
+
+.footer-phone:hover {
+  color: #ffffff;
+  /* Uses the blue from your gradient theme */
+}
+
+/* Social & Payment Icons */
+.footer-socials {
+  text-align: right;
+}
+
+.footer-socials p {
+  margin-bottom: 1.2rem;
+  font-weight: 600;
+  color: var(--white);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-size: 0.85rem;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+}
+
+
+/* Bottom Copyright Strip */
+.footer-bottom {
+  text-align: center;
+  padding-top: 2rem;
+  font-size: 0.85rem;
+  color: #ffffff;
+}
+
+/* =========================================
+   MOBILE RESPONSIVENESS FOR FOOTER
+========================================= */
+@media screen and (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 3rem;
+  }
+
+  .footer-socials {
+    text-align: center;
+  }
+
+  .social-icons {
+    justify-content: center;
+  }
+}
